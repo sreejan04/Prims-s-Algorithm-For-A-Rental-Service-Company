@@ -1,0 +1,74 @@
+print("Rental Services:-")
+print("1. Cost = Rs. 210 per hour")
+print("2. Cost = Rs. 21 per km")
+print("Your distance and time graphs are:-")
+V=5
+time_gr=[[0,3,7,6,3],
+     [3,0,5,4,3],
+     [7,5,0,1,8],
+     [6,4,1,0,7],
+     [3,3,8,7,0]]
+dist_gr=[[0,96,173,168,73],
+     [96,0,121,117,116],
+     [173,121,0,46,193],
+     [168,117,46,0,189],
+     [73,116,193,189,0]]
+print("Time graph:-")
+print(time_gr)
+print("Distance graph:-")
+print(dist_gr)
+INF = 9999999
+def time(time_gr):
+  total_time=0
+  selected = [0, 0, 0, 0, 0]
+  no_edge = 0
+  selected[0] = True
+  while (no_edge < V - 1):
+    minimum = INF
+    x = 0
+    y = 0
+    for i in range(V):
+      if selected[i]:
+        for j in range(V):
+          if ((not selected[j]) and time_gr[i][j]): 
+            if minimum > time_gr[i][j]:
+              minimum = time_gr[i][j]
+              x = i
+              y = j
+    total_time+=time_gr[x][y]
+    selected[y] = True
+    no_edge += 1
+  return total_time
+def distance(dist_gr):
+  total_dist=0
+  selected = [0, 0, 0, 0, 0]
+  no_edge = 0
+  selected[0] = True
+  while (no_edge < V - 1):
+    minimum = INF
+    x = 0
+    y = 0
+    for i in range(V):
+      if selected[i]:
+        for j in range(V):
+          if ((not selected[j]) and dist_gr[i][j]): 
+            if minimum > dist_gr[i][j]:
+              minimum = dist_gr[i][j]
+              x = i
+              y = j
+    total_dist+=dist_gr[x][y]
+    selected[y] = True
+    no_edge += 1
+  return total_dist
+total_time=time(time_gr)
+total_dist=distance(dist_gr)
+time_cost= 210*total_time
+dist_cost= 21*total_dist
+if(time_cost>dist_cost):
+  print("Choose Rental Service 2")
+else:
+  print("Choose Rental Service 1")
+
+
+
+
